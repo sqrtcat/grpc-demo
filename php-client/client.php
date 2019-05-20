@@ -1,4 +1,7 @@
 <?php
+/**
+ * @throws Exception
+ */
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -21,15 +24,19 @@ $userIndexRequest = new UserIndexRequest();
 $userIndexRequest->setPage(1);
 $userIndexRequest->setPageSize(12);
 
-/* @var UserIndexResponse */
+$response = $userClient->UserIndex($userIndexRequest);
+
+/* @var $userIndexResponse UserIndexResponse */
 list($userIndexResponse, $statusObj) = $userClient->UserIndex($userIndexRequest)->wait();
+
 
 if (0 != $statusObj->code) {
     throw new Exception($statusObj->details, $statusObj->code);
 }
 
 printf("index request end: err %d msg %s \n", $userIndexResponse->getErr(), $userIndexResponse->getMsg());
-/* @var [UserEntity, UserEntity] */
+
+/* @var UserEntity[] */
 $data = $userIndexResponse->getData();
 foreach ($data as $row) {
     echo $row->getName(), " ", $row->getAge() . PHP_EOL;
