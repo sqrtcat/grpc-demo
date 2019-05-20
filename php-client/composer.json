@@ -1,0 +1,14 @@
+{
+    "name": "root/php-client",
+    "require": {
+        "google/protobuf": "^3.7",
+        "grpc/grpc": "^1.19"
+    },
+    "autoload": {
+        "psr-4": {
+            "User\\": "./grpc/User/",
+            "GPBMetadata\\": "./grpc/GPBMetadata/"
+        }
+    }
+
+}
