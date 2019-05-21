@@ -10,6 +10,7 @@ make install
 protoc --help
 ```
 ## install protoc-gen-go
+protobuf 没有内置 Go 的编译器，需单独安装 protoc-gen-go
 ```
 go get -u github.com/golang/protobuf/protoc-gen-go
 ```
@@ -98,9 +99,8 @@ protoc -I. --go_out=plugins=grpc:./user user.proto
 ```
 ## 生成 PHP 客户端
 ### 安装 grpc_php_plugin 插件
-借助 grpc_php_plugin 可以方便我们使用 protoc 生成封装的更为友好的客户端代码（client with stub）
+protobuf 虽然可以编译 php 版的客户端，但使用 grpc 的 grpc_php_plugin 可以生成封装的更为友好的 grpc 客户端代码（client with stub）
 ```
-#grpc 内置了多种语言的插件 但当前还没有 go 的，所以 go 单独用 get 安装了 protoc-gen-go
 git clone -b $(curl -L https://grpc.io/release) https://github.com/grpc/grpc
 cd grpc && git submodule update --init
 # 这里我们只编译 php 的插件 如果要编译所有的 make && make install
@@ -108,7 +108,7 @@ make grpc_php_plugin
 # 记住插件路径
 ll ./bins/opt/grpc_php_plugin
 ```
-### 生成 php client with stub
+### 生成 php client
 注意 protoc-gen-grpc 路径的正确性
 ```
 protoc -I. \
