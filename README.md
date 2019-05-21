@@ -121,5 +121,13 @@ user.proto
 go run server.go
 
 ## client run
+```
 go run client.go
-cd php-client && php client.php
+# php
+cd php-client
+# 安装扩展
+pecl install grpc
+pecl install protobuf
+# 安装依赖
+composer install
+php client.php
